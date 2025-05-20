@@ -1,21 +1,40 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+import { View, StatusBar, StyleSheet, ScrollView } from 'react-native';
+
+import Titulo from './components/loginComponents/titulo.js';
+import InputEmail from './components/loginComponents/inputEmail.js';
+import InputContrasena from './components/loginComponents/inputContrasena.js';
+import Recordarme from './components/loginComponents/checkboxRecordarme.js';
+import BotonLogin from './components/loginComponents/botonPrincipal.js';
+import AccionesRapidas from './components/loginComponents/linksInferiores.js';
+import Separador from './components/loginComponents/divisor';
+import BotonFacebook from './components/loginComponents/botonFacebook.js';
+import BotonGoogle from './components/loginComponents/botonGoogle.js';
 
 const Login = () => {
     return (
-        <View style={styles.container}>
-            <Text>Login Screen</Text>
+        <ScrollView contentContainerStyle={styles.container}>
             <StatusBar style="auto" />
-        </View>
+            <Titulo />
+            <InputEmail />
+            <InputContrasena />
+            <Recordarme />
+            <BotonLogin />
+            <AccionesRapidas />
+            <Separador />
+            <BotonFacebook />
+            <BotonGoogle />
+        </ScrollView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flexGrow: 1,
+        backgroundColor: '#F7F7F7',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingVertical: 40,
     },
 });
 
