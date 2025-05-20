@@ -1,37 +1,35 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Image, View } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import facebookLogo from '../../../assets/images/facebook-logo.png';
 
 const BotonFacebook = () => {
     return (
         <TouchableOpacity style={styles.boton}>
-            <View style={styles.contenido}>
-                <Image source={require('../../assets/images/facebook-logo.png')} style={styles.logo} />
-                <Text style={styles.texto}>Sign In with Facebook</Text>
-            </View>
+            <Image source={facebookLogo} style={styles.icono} />
+            <Text style={styles.texto}>Sign In with Facebook</Text>
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     boton: {
-        backgroundColor: '#007bff',
-        borderRadius: 10,
-        padding: 12,
-        marginBottom: 10,
-    },
-    contenido: {
         flexDirection: 'row',
         alignItems: 'center',
+        backgroundColor: '#1877F2',
+        paddingVertical: 12,
+        borderRadius: 10,
+        width: '85%',
         justifyContent: 'center',
-    },
-    logo: {
-        width: 20,
-        height: 20,
-        marginRight: 8,
+        marginBottom: 10,
     },
     texto: {
         color: '#fff',
-        fontWeight: '600',
+        fontWeight: 'bold',
+        marginLeft: 10,
+    },
+    icono: {
+        width: 20,
+        height: 20,
     },
 });
 

@@ -4,7 +4,7 @@ import { View, StatusBar, StyleSheet, ScrollView } from 'react-native';
 import Titulo from './components/loginComponents/titulo.js';
 import InputEmail from './components/loginComponents/inputEmail.js';
 import InputContrasena from './components/loginComponents/inputContrasena.js';
-import Recordarme from './components/loginComponents/checkboxRecordarme.js';
+import Recordarme from './components/loginComponents/recordarme.js';
 import BotonLogin from './components/loginComponents/botonPrincipal.js';
 import AccionesRapidas from './components/loginComponents/linksInferiores.js';
 import Separador from './components/loginComponents/divisor';

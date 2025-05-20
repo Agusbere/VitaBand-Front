@@ -1,34 +1,36 @@
 import React from 'react';
-import { View, TextInput, StyleSheet, Image, Text } from 'react-native';
+import { View, TextInput, Image, StyleSheet, Text } from 'react-native';
+import mailIcon from '../../../assets/images/mail.png';
 
-const CampoEmail = () => {
+const InputEmail = () => {
     return (
-        <View style={styles.contenedor}>
+        <View style={styles.container}>
             <Text style={styles.label}>Email Address</Text>
-            <View style={styles.inputContainer}>
-                <Image source={require('../../assets/images/mail.png')} style={styles.icono} />
-                <TextInput placeholder="Enter your email" style={styles.input} />
+            <View style={styles.inputWrapper}>
+                <Image source={mailIcon} style={styles.icono} />
+                <TextInput style={styles.input} placeholder="Enter your email" keyboardType="email-address" />
             </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
-    contenedor: {
-        marginBottom: 20,
+    container: {
+        width: '85%',
+        marginBottom: 15,
     },
     label: {
-        fontWeight: '600',
-        marginBottom: 6,
+        marginBottom: 5,
         color: '#333',
     },
-    inputContainer: {
+    inputWrapper: {
         flexDirection: 'row',
-        alignItems: 'center',
         backgroundColor: '#fff',
-        borderRadius: 30,
+        borderRadius: 25,
         paddingHorizontal: 15,
-        height: 45,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#ddd',
     },
     icono: {
         width: 20,
@@ -37,7 +39,8 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
+        height: 40,
     },
 });
 
-export default CampoEmail;
+export default InputEmail;

@@ -1,40 +1,36 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Image, View } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, View, Image } from 'react-native';
+import logo from '../../../assets/images/login.png';
 
-const BotonPrincipal = () => {
+const BotonLogin = () => {
     return (
         <TouchableOpacity style={styles.boton}>
-            <View style={styles.contenido}>
-                <Text style={styles.texto}>Sign In</Text>
-                <Image source={require('../../assets/images/verContra.png')} style={styles.icono} />
-            </View>
+            <Text style={styles.texto}>Sign In</Text>
+            <Image source={logo} style={styles.icono} />
         </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     boton: {
-        backgroundColor: '#007bff',
-        borderRadius: 30,
-        height: 45,
+        backgroundColor: '#007AFF',
+        paddingVertical: 12,
+        borderRadius: 25,
+        width: '85%',
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 15,
-    },
-    contenido: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        marginTop: 15,
     },
     texto: {
         color: '#fff',
-        fontWeight: '600',
-        marginRight: 6,
+        fontWeight: 'bold',
+        marginRight: 10,
     },
     icono: {
-        width: 16,
-        height: 16,
-        tintColor: '#fff',
+        width: 20,
+        height: 20,
     },
 });
 
-export default BotonPrincipal;
+export default BotonLogin;

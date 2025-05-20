@@ -1,15 +1,24 @@
-import React from 'react';
-import { View, TextInput, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, Image, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import passIcon from '../../../assets/images/contrasena.png';
+import verContra from '../../../assets/images/verContra.png';
+import ocultarContra from '../../../assets/images/ocultarContra.png';
 
-const CampoContrasena = () => {
+const InputContrasena = () => {
+    const [verPassword, setVerPassword] = useState(false);
+
     return (
-        <View style={styles.contenedor}>
+        <View style={styles.container}>
             <Text style={styles.label}>Password</Text>
-            <View style={styles.inputContainer}>
-                <Image source={require('../../assets/images/contrasena.png')} style={styles.icono} />
-                <TextInput placeholder="Enter your password" secureTextEntry style={styles.input} />
-                <TouchableOpacity>
-                    <Image source={require('../../assets/images/verContra.png')} style={styles.icono} />
+            <View style={styles.inputWrapper}>
+                <Image source={passIcon} style={styles.icono} />
+                <TextInput
+                    style={styles.input}
+                    secureTextEntry={!verPassword}
+                    placeholder="Enter your password"
+                />
+                <TouchableOpacity onPress={() => setVerPassword(!verPassword)}>
+                    <Image source={verPassword ? ocultarContra : verContra} style={styles.icono} />
                 </TouchableOpacity>
             </View>
         </View>
@@ -17,30 +26,32 @@ const CampoContrasena = () => {
 };
 
 const styles = StyleSheet.create({
-    contenedor: {
-        marginBottom: 15,
+    container: {
+        width: '85%',
+        marginBottom: 10,
     },
     label: {
-        fontWeight: '600',
-        marginBottom: 6,
+        marginBottom: 5,
         color: '#333',
     },
-    inputContainer: {
+    inputWrapper: {
         flexDirection: 'row',
-        alignItems: 'center',
         backgroundColor: '#fff',
-        borderRadius: 30,
+        borderRadius: 25,
         paddingHorizontal: 15,
-        height: 45,
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: '#ddd',
     },
     icono: {
         width: 20,
         height: 20,
-        marginRight: 10,
     },
     input: {
         flex: 1,
+        height: 40,
+        marginHorizontal: 10,
     },
 });
 
-export default CampoContrasena;
+export default InputContrasena;
