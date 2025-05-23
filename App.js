@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import LoginScreen from './src/login';
+import AppNavigator from './appNavigator.js'
+import TabsNavigator from './tabsNavigator.js'
 
 const Stack = createNativeStackNavigator();
 
@@ -31,8 +33,12 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{ headerShown: false }}
+      >
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="HomeTabs" component={HomeTabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );
