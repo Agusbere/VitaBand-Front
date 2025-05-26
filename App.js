@@ -5,7 +5,7 @@ import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import LoginScreen from './src/login';
 import AppNavigator from './appNavigator.js'
-import TabsNavigator from './tabsNavigator.js'
+import HomeTabsNavigator from './tabsNavigator.js'
 
 const Stack = createNativeStackNavigator();
 

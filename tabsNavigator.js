@@ -5,7 +5,7 @@ import Banders from "./src/banders.js";
 import Calendar from "./src/calendar.js";
 import Profile from "./src/profile.js";
 import NewMedication from "./src/newMedication.js";
-import CustomTabBar from "./src/components/navigationBar.js";
+import CustomTabBar from "./src/navigationBar.js";
 
 const Tab = createBottomTabNavigator();
 
