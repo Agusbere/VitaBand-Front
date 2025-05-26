@@ -2,16 +2,15 @@ import React from 'react';
 import { View, TextInput, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const InputEmail = () => {
+const InputUsername = () => {
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Email Address</Text>
+            <Text style={styles.label}>Username</Text>
             <View style={styles.inputWrapper}>
-                <Ionicons name="mail-outline" size={20} color="#333" />
+                <Ionicons name="person-outline" size={20} color="#333" />
                 <TextInput
                     style={styles.input}
-                    placeholder="Enter your email"
-                    keyboardType="email-address"
+                    placeholder="Enter your username"
                     autoCapitalize="none"
                 />
             </View>
@@ -44,4 +43,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default InputEmail;
+export default InputUsername;

@@ -1,14 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const EnlacesInferiores = () => {
+    const navigation = useNavigation();
+
     return (
         <View style={styles.container}>
             <Text style={styles.texto}>
                 Don't have an account?
-                <Text style={styles.link}> Sign Up</Text>
+                <Text style={styles.link} onPress={() => navigation.navigate('SignUp')}> Sign Up</Text>
             </Text>
-            <Text style={styles.olvido}>Forgot Password</Text>
+            <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
+                <Text style={styles.olvido}>Forgot Password</Text>
+            </TouchableOpacity>
         </View>
     );
 };
