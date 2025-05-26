@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
-import googleLogo from '../../../assets/images/google-logo.png';
+import googleLogo from '../../../assets/icons/google-logo.png';
 
 const BotonGoogle = () => {
     return (

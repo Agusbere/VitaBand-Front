@@ -3,9 +3,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import LoginScreen from './src/login';
-import HomeTabsNavigator from './tabsNavigator.js'
-import SplashScreen from './src/splash-screen';
+import LoginScreen from './src/screens/login.js';
+import HomeTabsNavigator from './src/navigation/tabsNavigator.js'
+import SplashScreen from './src/screens/splash-screen.js';
 
 const Stack = createNativeStackNavigator();
 

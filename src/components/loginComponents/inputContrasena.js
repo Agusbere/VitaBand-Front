@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, Image, TouchableOpacity, StyleSheet, Text } from 'react-native';
-import passIcon from '../../../assets/images/contrasena.png';
-import verContra from '../../../assets/images/verContra.png';
-import ocultarContra from '../../../assets/images/ocultarContra.png';
+import passIcon from '../../../assets/icons/contrasena.png';
+import verContra from '../../../assets/icons/verContra.png';
+import ocultarContra from '../../../assets/icons/ocultarContra.png';
 
 const InputContrasena = () => {
     const [verPassword, setVerPassword] = useState(false);

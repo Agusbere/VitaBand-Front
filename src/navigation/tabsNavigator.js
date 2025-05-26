@@ -1,11 +1,11 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "./src/home.js";
-import Banders from "./src/banders.js";
-import Calendar from "./src/calendar.js";
-import Profile from "./src/profile.js";
-import NewMedication from "./src/newMedication.js";
-import CustomTabBar from "./src/navigationBar.js";
+import Home from "../screens/home.js";
+import Banders from "../screens/banders.js";
+import Calendar from "../screens/calendar.js";
+import Profile from "../screens/profile.js";
+import NewMedication from "../screens/newMedication.js";
+import CustomTabBar from "./navigationBar.js";
 
 const Tab = createBottomTabNavigator();
 

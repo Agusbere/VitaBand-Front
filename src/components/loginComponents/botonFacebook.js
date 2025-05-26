@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
-import facebookLogo from '../../../assets/images/facebook-logo.png';
+import facebookLogo from '../../../assets/icons/facebook-logo.png';
 
 const BotonFacebook = () => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TextInput, Image, StyleSheet, Text } from 'react-native';
-import mailIcon from '../../../assets/images/mail.png';
+import mailIcon from '../../../assets/icons/mail.png';
 
 const InputEmail = () => {
     return (
