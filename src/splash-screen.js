@@ -1,76 +1,62 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, Animated, Dimensions } from "react-native";
-import LinearGradient from 'react-native-linear-gradient';
+import { View, Animated, Dimensions, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-export default function SplashScreen({ navigation }) {
+const { width, height } = Dimensions.get("window");
+
+const SplashScreen = () => {
+  const navigation = useNavigation();
   const scaleAnim = useRef(new Animated.Value(1)).current;
-  const screenWidth = Dimensions.get("window").width;
-  const screenHeight = Dimensions.get("window").height;
 
   useEffect(() => {
-    const bounces = [
-      Animated.spring(scaleAnim, {
-        toValue: 1.5,
-        friction: 3,
-        useNativeDriver: true,
-      }),
-      Animated.spring(scaleAnim, {
-        toValue: 2.5,
-        friction: 3,
-        useNativeDriver: true,
-      }),
-      Animated.spring(scaleAnim, {
-        toValue: 4,
-        friction: 3,
-        useNativeDriver: true,
-      }),
-      Animated.spring(scaleAnim, {
-        toValue: 10,
-        friction: 3,
-        useNativeDriver: true,
-      }),
-    ];
+    const bounceAnimations = [];
 
-    Animated.sequence(bounces).start(() => {
-      navigation.replace("HomeTabsNavigator");
+    const scaleSteps = [1.5, 2, 3, 20];
+
+    scaleSteps.forEach((scaleValue, index) => {
+      bounceAnimations.push(
+        Animated.spring(scaleAnim, {
+          toValue: scaleValue,
+          friction: 5,
+          tension: 70,
+          useNativeDriver: true,
+          delay: index * 300,
+        })
+      );
+    });
+
+    Animated.sequence(bounceAnimations).start(() => {
+      navigation.replace("HomeTabs");
     });
   }, []);
 
   return (
-    <View style={styles.fondo}>
+    <View style={styles.container}>
       <Animated.View
         style={[
-          styles.circuloContenedor,
+          styles.circle,
           {
             transform: [{ scale: scaleAnim }],
           },
         ]}
-      >
-        <LinearGradient
-          colors={["#05D2FF", "#3787E5"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.circuloGradiente}
-        />
-      </Animated.View>
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  fondo: {
+  container: {
     flex: 1,
     backgroundColor: "#FFFFFF",
     justifyContent: "center",
     alignItems: "center",
   },
-  circuloContenedor: {
+  circle: {
     width: 100,
     height: 100,
+    backgroundColor: "#05D2FF",
     borderRadius: 50,
-    overflow: "hidden",
-  },
-  circuloGradiente: {
-    flex: 1,
   },
 });
+
+export default SplashScreen;
