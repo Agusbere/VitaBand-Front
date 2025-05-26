@@ -3,7 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const CustomTabBar = ({ state, descriptors, navigation }) => {
+const NavBar = ({ state, descriptors, navigation }) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   const nav = useNavigation();
 
@@ -61,7 +61,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
   );
 };
 
-export default CustomTabBar;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -89,3 +89,5 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
 });
+
+export default NavBar;

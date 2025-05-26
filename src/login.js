@@ -13,7 +13,7 @@ import BotonGoogle from "./components/loginComponents/botonGoogle.js";
 
 const Login = ({ navigation }) => {
   const handleLogin = () => {
-    navigation.navigate("HomeTabs");
+    navigation.navigate('SplashScreen');
   };
 
   return (
