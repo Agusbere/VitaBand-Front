@@ -1,13 +1,8 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import LoginScreen from './src/screens/login.js';
-import HomeTabsNavigator from './src/navigation/tabsNavigator.js'
-import SplashScreen from './src/screens/splash-screen.js';
+import AppNavigator from './src/navigation/appNavigator.js';
 
-const Stack = createNativeStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -32,15 +27,6 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{ headerShown: false }}
-      >
-        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="HomeTabs" component={HomeTabsNavigator} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppNavigator/>
   );
 }
