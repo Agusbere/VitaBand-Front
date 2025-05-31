@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/home.js";
+import Home from "../screens/hosterScreens/hosterHome.js";
 import Banders from "../screens/banders.js";
 import Calendar from "../screens/calendar.js";
 import Profile from "../screens/profile.js";

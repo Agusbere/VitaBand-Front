@@ -1,11 +1,11 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import LoginScreen from "../screens/login";
-import HomeTabsNavigator from "./tabsNavigator";
-import SplashScreen from '../screens/splash-screen';
-import SignUp from '../screens/signUp';
-import ForgotPassword from '../screens/forgotPassword';
+import LoginScreen from "../screens/login.js";
+import HomeTabsNavigator from "./tabsNavigator.js";
+import SplashScreen from '../screens/splash-screen.js';
+import SignUp from '../screens/signUp.js';
+import ForgotPassword from '../screens/forgotPassword.js';
 
 const Stack = createNativeStackNavigator();
 
