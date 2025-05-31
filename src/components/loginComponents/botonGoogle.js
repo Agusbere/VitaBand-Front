@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     },
     texto: {
         color: '#000',
-        fontWeight: 'bold',
+        fontFamily: 'PlusJakartaSans-Bold',
         marginLeft: 10,
     },
     icono: {

@@ -24,12 +24,13 @@ const styles = StyleSheet.create({
     },
     texto: {
         color: '#fff',
-        fontWeight: 'bold',
         marginLeft: 10,
+        fontFamily: 'PlusJakartaSans-Bold',
     },
     icono: {
-        width: 20,
-        height: 20,
+        width: 28,
+        height: 28,
+        resizeMode: 'contain',
     },
 });
 

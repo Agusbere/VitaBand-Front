@@ -53,10 +53,12 @@ const styles = StyleSheet.create({
     textoSecundario: {
         color: '#222',
         fontSize: 14,
+        fontFamily: 'PlusJakartaSans-Regular',
     },
     link: {
         color: '#2196F3',
         fontWeight: 'bold',
+        fontFamily: 'PlusJakartaSans-Bold',
     },
 });
 

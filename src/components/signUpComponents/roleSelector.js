@@ -30,6 +30,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#222',
         marginBottom: 8,
+        fontFamily: 'PlusJakartaSans-Regular',
+        fontSize: 12,
     },
     roleContainer: {
         flexDirection: 'row',

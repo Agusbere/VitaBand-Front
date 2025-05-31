@@ -56,10 +56,12 @@ const styles = StyleSheet.create({
         color: '#222',
         marginTop: 10,
         textAlign: 'center',
+        fontFamily: 'PlusJakartaSans-Regular',
     },
     signInLink: {
         color: '#2196F3',
         fontWeight: 'bold',
+        fontFamily: 'PlusJakartaSans-Bold',
     },
 });
 
