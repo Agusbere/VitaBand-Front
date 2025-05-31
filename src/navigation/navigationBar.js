@@ -1,11 +1,10 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const NavBar = ({ state, descriptors, navigation }) => {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
-  const nav = useNavigation();
 
   if (focusedOptions.tabBarVisible === false) return null;
 
@@ -17,9 +16,17 @@ const NavBar = ({ state, descriptors, navigation }) => {
             <TouchableOpacity
               key={index}
               onPress={() => navigation.navigate("NewMedication")}
-              style={styles.plusButton}
+              style={styles.plusButtonWrapper}
+              activeOpacity={0.85}
             >
-              <Ionicons name="add" size={30} color="white" />
+              <LinearGradient
+                colors={["#007FFF", "#0066CD"]}
+                style={styles.plusButton}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+              >
+                <Ionicons name="add" size={30} color="white" />
+              </LinearGradient>
             </TouchableOpacity>
           );
         }
@@ -32,8 +39,6 @@ const NavBar = ({ state, descriptors, navigation }) => {
           Profile: "person",
         }[route.name];
 
-        if (!iconName) return null;
-
         return (
           <TouchableOpacity
             key={index}
@@ -43,11 +48,11 @@ const NavBar = ({ state, descriptors, navigation }) => {
             <Ionicons
               name={iconName}
               size={22}
-              color={isFocused ? "#3B82F6" : "#94A3B8"}
+              color={isFocused ? "#007FFF" : "#94A3B8"}
             />
             <Text
               style={{
-                color: isFocused ? "#3B82F6" : "#94A3B8",
+                color: isFocused ? "#007FFF" : "#94A3B8",
                 fontFamily: "PlusJakartaSans-SemiBold",
                 fontSize: 12,
               }}
@@ -60,8 +65,6 @@ const NavBar = ({ state, descriptors, navigation }) => {
     </View>
   );
 };
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -79,14 +82,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  plusButtonWrapper: {
+    marginBottom: 30,
+    borderRadius: 30,
+  },
   plusButton: {
-    backgroundColor: "#3B82F6",
     width: 60,
     height: 60,
     borderRadius: 30,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 30,
   },
 });
 
