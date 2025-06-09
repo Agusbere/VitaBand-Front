@@ -40,30 +40,30 @@ const Confetti = ({ count = 80, duration = 3400 }) => {
 
     return (
         <View style={[StyleSheet.absoluteFill, { zIndex: 999 }]} pointerEvents="box-none">
-            {confetti.map((c, i) => {
+            {confetti.map((confetti, i) => {
                 let shapeStyle = {};
-                if (c.shape === 'circle') {
-                    shapeStyle = { borderRadius: c.size / 2 };
-                } else if (c.shape === 'square') {
+                if (confetti.shape === 'circle') {
+                    shapeStyle = { borderRadius: confetti.size / 2 };
+                } else if (confetti.shape === 'square') {
                     shapeStyle = {};
-                } else if (c.shape === 'wave') {
+                } else if (confetti.shape === 'wave') {
                     shapeStyle = {
-                        borderRadius: c.size / 2,
-                        width: c.size * 1.5,
-                        height: c.size / 2,
-                        backgroundColor: c.color,
-                        transform: [{ rotate: `${c.rotate}deg` }],
+                        borderRadius: confetti.size / 2,
+                        width: confetti.size * 1.5,
+                        height: confetti.size / 2,
+                        backgroundColor: confetti.color,
+                        transform: [{ rotate: `${confetti.rotate}deg` }],
                     };
                 }
 
                 return (
                     <Animated.View
-                        key={c.key}
+                        key={confetti.key}
                         style={[
                             {
                                 position: 'absolute',
-                                left: c.left,
-                                top: c.top,
+                                left: confetti.left,
+                                top: confetti.top,
                                 opacity: anims[i].interpolate({
                                     inputRange: [0, 0.8, 1],
                                     outputRange: [1, 1, 0],
@@ -75,13 +75,13 @@ const Confetti = ({ count = 80, duration = 3400 }) => {
                                             outputRange: [0, height - 40],
                                         }),
                                     },
-                                    { rotate: `${c.rotate}deg` },
+                                    { rotate: `${confetti.rotate}deg` },
                                 ],
                                 zIndex: 999,
-                                width: c.shape === 'wave' ? c.size * 1.5 : c.size,
-                                height: c.shape === 'wave' ? c.size / 2 : c.size,
-                                backgroundColor: c.shape === 'wave' ? undefined : c.color,
-                                borderRadius: c.shape === 'circle' ? c.size / 2 : 3,
+                                width: confetti.shape === 'wave' ? confetti.size * 1.5 : confetti.size,
+                                height: confetti.shape === 'wave' ? confetti.size / 2 : confetti.size,
+                                backgroundColor: confetti.shape === 'wave' ? undefined : confetti.color,
+                                borderRadius: confetti.shape === 'circle' ? confetti.size / 2 : 3,
                             },
                             shapeStyle,
                         ]}
