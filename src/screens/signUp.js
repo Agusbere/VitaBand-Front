@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, StatusBar, View, Text } from 'react-native';
+
 import Titulo from '../components/loginComponents/titulo.js';
 import InputUsername from '../components/signUpComponents/inputUsername.js';
 import InputTelefono from '../components/signUpComponents/inputTelefono.js';
 import InputEmail from '../components/loginComponents/inputEmail.js';
 import InputContrasena from '../components/loginComponents/inputContrasena.js';
 import PasswordStrengthMeter from '../components/signUpComponents/strongPassword.js';
-import RoleSelector from '../components/signUpComponents/roleSelector.js';
+import GenderSelector from '../components/signUpComponents/genderSelector.js';
 import BotonPrincipal from '../components/loginComponents/botonPrincipal.js';
 
 const SignUp = ({ navigation }) => {
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('Bander');
+    const [gender, setGender] = useState('');
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -27,7 +28,7 @@ const SignUp = ({ navigation }) => {
             />
             <PasswordStrengthMeter password={password} />
             <InputContrasena label="Confirm Password" />
-            <RoleSelector role={role} setRole={setRole} />
+            <GenderSelector selectedGender={gender} onSelectGender={setGender} />
             <BotonPrincipal texto="Sign Up" onLogin={() => navigation.navigate('SplashScreen')} />
             <Text style={styles.bottomText}>
                 Already have an account?{' '}
