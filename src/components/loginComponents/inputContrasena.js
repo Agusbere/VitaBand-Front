@@ -22,7 +22,6 @@ const InputContrasena = ({ label = "Password", value, onChangeText }) => {
                     underlineColorAndroid="transparent"
                     onFocus={() => setBorderColor('#007bff')}
                     onBlur={() => setBorderColor('#ddd')}
-                    // Quita el outline amarillo en web
                     outlineWidth={0}
                 />
                 <TouchableOpacity onPress={() => setVerPassword(!verPassword)}>

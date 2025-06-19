@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, StatusBar, View, Text } from 'react-native';
 
-import Titulo from '../components/loginComponents/titulo.js';
+import Titulo from '../components/signUpComponents/titulo.js';
 import InputUsername from '../components/signUpComponents/inputUsername.js';
 import InputTelefono from '../components/signUpComponents/inputTelefono.js';
 import InputEmail from '../components/loginComponents/inputEmail.js';

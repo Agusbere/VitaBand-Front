@@ -7,7 +7,7 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://192.168.1.X:3000/generos") // cambia por tu IP real
+        fetch("http://192.168.1.X:3000/generos") // cambiar por la IP real
             .then(res => res.json())
             .then(data => {
                 setGeneros(data);
@@ -21,7 +21,7 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.label}>Select your gender</Text>
+            <Text style={styles.label}>Gender</Text>
             {loading ? (
                 <ActivityIndicator color="#007FFF" />
             ) : (
@@ -30,9 +30,9 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
                         selectedValue={selectedGender}
                         onValueChange={onSelectGender}
                         style={styles.picker}
-                        dropdownIconColor="#007FFF"
+                        dropdownIconColor="#333"
                     >
-                        <Picker.Item label="Select..." value="" enabled={false} />
+                        <Picker.Item label="Male" value="" enabled={false} />
                         {generos.map((item) => (
                             <Picker.Item key={item.id} label={item.nombre} value={item.nombre} />
                         ))}
