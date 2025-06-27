@@ -7,7 +7,7 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("http://192.168.1.X:3000/generos") // cambiar por la IP real
+        fetch("https://enhanced-obviously-panther.ngrok-free.app/api/gender")
             .then(res => res.json())
             .then(data => {
                 setGeneros(data);
@@ -34,7 +34,7 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
                     >
                         <Picker.Item label="Male" value="" enabled={false} />
                         {generos.map((item) => (
-                            <Picker.Item key={item.id} label={item.nombre} value={item.nombre} />
+                            <Picker.Item key={item.id} label={item.nombre} value={item.id} />
                         ))}
                     </Picker>
                 </View>
