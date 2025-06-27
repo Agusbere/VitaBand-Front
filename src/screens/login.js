@@ -1,23 +1,54 @@
-import React from 'react';
-import { ScrollView, StyleSheet, StatusBar, View, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, Alert, StyleSheet, View, Text, TouchableOpacity, StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import Titulo from '../components/loginComponents/titulo.js';
 import InputEmail from '../components/loginComponents/inputEmail.js';
 import InputContrasena from '../components/loginComponents/inputContrasena.js';
-import Recordarme from '../components/loginComponents/recordarme.js';
 import BotonPrincipal from '../components/loginComponents/botonPrincipal.js';
 import Divisor from '../components/loginComponents/divisor.js';
 import BotonFacebook from '../components/loginComponents/botonFacebook.js';
 import BotonGoogle from '../components/loginComponents/botonGoogle.js';
 
 const Login = ({ navigation }) => {
+    const [mail, setMail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = async () => {
+        if (!mail || !password) {
+            Alert.alert("Faltan datos", "Completá todos los campos.");
+            return;
+        }
+
+        try {
+            const response = await fetch("https://enhanced-obviously-panther.ngrok-free.app/api/auth/login", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ mail, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                await AsyncStorage.setItem('token', data.token);
+                Alert.alert("Bienvenido");
+                navigation.navigate('SplashScreen');
+            } else {
+                Alert.alert("Error", data.error || "Credenciales incorrectas");
+            }
+        } catch (err) {
+            console.error("ERROR LOGIN:", err);
+            Alert.alert("Error de conexión");
+        }
+    };
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
             <StatusBar style="auto" />
             <Titulo login />
-            <InputEmail />
-            <InputContrasena label="Password" />
-            <Recordarme />
-            <BotonPrincipal texto="Sign In" onLogin={() => navigation.navigate('SplashScreen')} />
+            <InputEmail value={mail} onChangeText={setMail} />
+            <InputContrasena value={password} onChangeText={setPassword} label="Password" />
+            <BotonPrincipal texto="Sign In" onLogin={handleLogin} />
             <View style={styles.linksContainer}>
                 <Text style={styles.textoSecundario}>
                     Don’t have an account?{' '}
