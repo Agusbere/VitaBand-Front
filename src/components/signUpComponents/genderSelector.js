@@ -10,27 +10,15 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
     useEffect(() => {
         const fetchGenders = async () => {
             try {
-                
-
                 const response = await fetch("https://enhanced-obviously-panther.ngrok-free.app/api/gender", {
                     method: "GET",
                     headers: {
-                      "Accept": "application/json"
+                        "content-type": "application/json",
+                        "ngrok-skip-browser-warning": "*",
                     }
-                  });
-                  const data = await response.json();
-
-                console.log('Respuesta:', data)
-                return;
-
-                try {
-                    const data = JSON.parse(text);
-                    console.log("DATA PARSEADA:", data);
-                    setGeneros(Array.isArray(data) ? data : []);
-                } catch (err) {
-                    console.error("No es JSON:", err);
-                    setGeneros([]);
-                }
+                });
+                const data = await response.json();
+                setGeneros(data);
             } catch (err) {
                 console.error("Error fetching géneros:", err);
                 setGeneros([]);
