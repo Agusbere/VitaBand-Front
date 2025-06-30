@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-const InputContrasena = ({ label = "Password", value, onChangeText }) => {
+const InputContrasena = ({ label, value, onChangeText }) => {
     const [verPassword, setVerPassword] = useState(false);
     const [borderColor, setBorderColor] = useState('#ddd');
     const iconColor = "#aaa";
@@ -15,7 +15,7 @@ const InputContrasena = ({ label = "Password", value, onChangeText }) => {
                 <TextInput
                     style={styles.input}
                     secureTextEntry={!verPassword}
-                    placeholder={`Enter your ${label.toLowerCase()}`}
+                    placeholder={label}
                     placeholderTextColor="#aaa"
                     value={value}
                     onChangeText={onChangeText}

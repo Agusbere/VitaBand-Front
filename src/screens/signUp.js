@@ -54,9 +54,9 @@ const SignUp = ({ navigation }) => {
             <Titulo />
             <InputEmail value={mail} onChangeText={setMail} />
             <InputTelefono value={phone} onChangeText={setPhone} />
-            <InputContrasena label="Password" value={password} onChangeText={setPassword} />
+            <InputContrasena label="Enter your password" value={password} onChangeText={setPassword} />
             <PasswordStrengthMeter password={password} />
-            <InputContrasena label="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} />
+            <InputContrasena label="Confirm your password" value={confirmPassword} onChangeText={setConfirmPassword} />
             <GenderSelector selectedGender={gender} onSelectGender={setGender} />
             <BotonPrincipal texto="Sign Up" onLogin={handleRegister} />
             <Text style={styles.bottomText}>

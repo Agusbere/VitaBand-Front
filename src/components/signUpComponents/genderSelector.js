@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 
 const GenderSelector = ({ selectedGender, onSelectGender }) => {
     const [generos, setGeneros] = useState([]);
@@ -33,31 +33,42 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.label}>Gender</Text>
-            {loading ? (
-                <ActivityIndicator color="#007FFF" />
-            ) : (
-                <View style={styles.pickerWrapper}>
+            <View style={styles.inputWrapper}>
+                <Ionicons name="male-female-outline" size={18} color="#aaa" style={{ marginRight: 8 }} />
+                <View style={styles.pickerContainer}>
                     <Picker
                         selectedValue={selectedGender}
                         onValueChange={onSelectGender}
                         style={styles.picker}
                         mode="dropdown"
-                        dropdownIconColor="#000"
+                        dropdownIconColor="#aaa"
+                        itemStyle={styles.pickerItem}
                     >
-                        <Picker.Item label="Seleccionar género..." value="" enabled={false} />
+                        <Picker.Item
+                            label="Enter your gender"
+                            value=""
+                            enabled={false}
+                            color="#aaa"
+                            style={styles.placeholder}
+                        />
                         {generos.map((item) => (
-                            <Picker.Item key={item.id} label={item.name} value={item.name} />
+                            <Picker.Item
+                                key={item.id}
+                                label={item.name}
+                                value={item.name}
+                                style={styles.pickerItem}
+                            />
                         ))}
                     </Picker>
                 </View>
-            )}
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
+        width: '85%',
         marginBottom: 15,
     },
     label: {
@@ -65,22 +76,42 @@ const styles = StyleSheet.create({
         color: '#333',
         fontFamily: 'PlusJakartaSans-Regular',
         fontSize: 12,
-        paddingLeft: 12,
     },
-    pickerWrapper: {
+    inputWrapper: {
+        flexDirection: 'row',
+        alignItems: 'center',
         backgroundColor: '#fff',
         borderRadius: 25,
+        paddingHorizontal: 15,
         borderWidth: 1,
         borderColor: '#ddd',
-        paddingHorizontal: Platform.OS === 'android' ? 10 : 0,
-        marginHorizontal: 10,
-        justifyContent: 'center',
         height: 48,
     },
-    picker: {
+    pickerContainer: {
+        flex: 1,
+        justifyContent: 'center',
         height: 48,
+        marginLeft: -6, // tira el texto más a la izquierda
+    },
+    picker: {
+        flex: 1,
         width: '100%',
         color: '#333',
+        fontFamily: 'PlusJakartaSans-Regular',
+        fontSize: 14, // más chico
+        height: Platform.OS === 'android' ? 48 : undefined,
+        paddingLeft: 0,
+        marginLeft: Platform.OS === 'android' ? -8 : 0, // Android: achica el margen izquierdo aún más
+    },
+    pickerItem: {
+        fontFamily: 'PlusJakartaSans-Regular',
+        color: '#333',
+        fontSize: 14,
+    },
+    placeholder: {
+        fontFamily: 'PlusJakartaSans-Regular',
+        color: '#aaa',
+        fontSize: 14,
     },
 });
 
