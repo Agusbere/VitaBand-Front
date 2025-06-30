@@ -12,20 +12,28 @@ import Titulo from '../components/signUpComponents/titulo.js';
 const SignUp = ({ navigation }) => {
     const [mail, setMail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [phone, setPhone] = useState('');
-    const [gender, setGender] = useState(''); // Acá se va a setear el nombre del género
+    const [gender, setGender] = useState('');
 
     const handleRegister = async () => {
-        if (!mail || !password || !phone) {
+        if (!mail || !password || !confirmPassword || !phone) {
             Alert.alert("Faltan datos", "Completá todos los campos obligatorios.");
             return;
         }
+
+        if (password !== confirmPassword) {
+            Alert.alert("Error", "Las contraseñas no coinciden.");
+            return;
+        }
+
+        const genderToSend = gender || "Male";
 
         try {
             const response = await fetch("https://enhanced-obviously-panther.ngrok-free.app/api/auth/register", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mail, password, phone, gender }),
+                body: JSON.stringify({ mail, password, phone, gender: genderToSend }),
             });
 
             const data = await response.json();
@@ -46,10 +54,11 @@ const SignUp = ({ navigation }) => {
         <ScrollView contentContainerStyle={styles.container}>
             <StatusBar style="auto" />
             <Titulo />
-            <InputTelefono value={phone} onChangeText={setPhone} />
             <InputEmail value={mail} onChangeText={setMail} />
+            <InputTelefono value={phone} onChangeText={setPhone} />
             <InputContrasena label="Password" value={password} onChangeText={setPassword} />
             <PasswordStrengthMeter password={password} />
+            <InputContrasena label="Confirm Password" value={confirmPassword} onChangeText={setConfirmPassword} />
             <GenderSelector selectedGender={gender} onSelectGender={setGender} />
             <BotonPrincipal texto="Sign Up" onLogin={handleRegister} />
             <Text style={styles.bottomText}>

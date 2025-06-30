@@ -11,6 +11,10 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
             .then(res => res.json())
             .then(data => {
                 setGeneros(data);
+                if (data.length > 0 && !selectedGender) {
+                    const defaultGenero = data.find(g => g.name === "Male") || data[0];
+                    onSelectGender(defaultGenero.name);
+                }
                 setLoading(false);
             })
             .catch(err => {
@@ -28,13 +32,12 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
                 <View style={styles.pickerWrapper}>
                     <Picker
                         selectedValue={selectedGender}
-                        onValueChange={onSelectGender}
+                        onValueChange={(itemValue) => onSelectGender(itemValue)}
                         style={styles.picker}
                         dropdownIconColor="#333"
                     >
-                        <Picker.Item label="Male" value="" enabled={false} />
                         {generos.map((item) => (
-                            <Picker.Item key={item.id} label={item.nombre} value={item.id} />
+                            <Picker.Item key={item.id} label={item.name} value={item.name} />
                         ))}
                     </Picker>
                 </View>
@@ -45,7 +48,7 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
 
 const styles = StyleSheet.create({
     container: {
-        width: '85%',
+        width: '100%',
         marginBottom: 15,
     },
     label: {
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
         color: '#333',
         fontFamily: 'PlusJakartaSans-Regular',
         fontSize: 12,
+        paddingLeft: 12,
     },
     pickerWrapper: {
         backgroundColor: '#fff',
@@ -61,9 +65,12 @@ const styles = StyleSheet.create({
         borderColor: '#ddd',
         paddingHorizontal: 10,
         justifyContent: 'center',
+        height: 50,
+        marginHorizontal: 20,
     },
     picker: {
-        height: 44,
+        height: 50,
+        width: '100%',
         color: '#333',
         fontFamily: 'PlusJakartaSans-Regular',
     },
