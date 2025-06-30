@@ -1,26 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, Platform } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import axios from 'axios';
 
 const GenderSelector = ({ selectedGender, onSelectGender }) => {
     const [generos, setGeneros] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch("https://enhanced-obviously-panther.ngrok-free.app/api/gender")
-            .then(res => res.json())
-            .then(data => {
-                setGeneros(data);
-                if (data.length > 0 && !selectedGender) {
-                    const defaultGenero = data.find(g => g.name === "Male") || data[0];
-                    onSelectGender(defaultGenero.name);
+        const fetchGenders = async () => {
+            try {
+                
+
+                const response = await fetch("https://enhanced-obviously-panther.ngrok-free.app/api/gender", {
+                    method: "GET",
+                    headers: {
+                      "Accept": "application/json"
+                    }
+                  });
+                  const data = await response.json();
+
+                console.log('Respuesta:', data)
+                return;
+
+                try {
+                    const data = JSON.parse(text);
+                    console.log("DATA PARSEADA:", data);
+                    setGeneros(Array.isArray(data) ? data : []);
+                } catch (err) {
+                    console.error("No es JSON:", err);
+                    setGeneros([]);
                 }
-                setLoading(false);
-            })
-            .catch(err => {
+            } catch (err) {
                 console.error("Error fetching géneros:", err);
+                setGeneros([]);
+            } finally {
                 setLoading(false);
-            });
+            }
+        };
+
+        fetchGenders();
     }, []);
 
     return (
@@ -32,10 +51,12 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
                 <View style={styles.pickerWrapper}>
                     <Picker
                         selectedValue={selectedGender}
-                        onValueChange={(itemValue) => onSelectGender(itemValue)}
+                        onValueChange={onSelectGender}
                         style={styles.picker}
-                        dropdownIconColor="#333"
+                        mode="dropdown"
+                        dropdownIconColor="#000"
                     >
+                        <Picker.Item label="Seleccionar género..." value="" enabled={false} />
                         {generos.map((item) => (
                             <Picker.Item key={item.id} label={item.name} value={item.name} />
                         ))}
@@ -63,16 +84,15 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         borderWidth: 1,
         borderColor: '#ddd',
-        paddingHorizontal: 10,
+        paddingHorizontal: Platform.OS === 'android' ? 10 : 0,
+        marginHorizontal: 10,
         justifyContent: 'center',
-        height: 50,
-        marginHorizontal: 20,
+        height: 48,
     },
     picker: {
-        height: 50,
+        height: 48,
         width: '100%',
         color: '#333',
-        fontFamily: 'PlusJakartaSans-Regular',
     },
 });
 

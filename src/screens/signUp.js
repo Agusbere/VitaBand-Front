@@ -17,7 +17,7 @@ const SignUp = ({ navigation }) => {
     const [gender, setGender] = useState('');
 
     const handleRegister = async () => {
-        if (!mail || !password || !confirmPassword || !phone) {
+        if (!mail || !password || !confirmPassword || !phone || !gender) {
             Alert.alert("Faltan datos", "Completá todos los campos obligatorios.");
             return;
         }
@@ -27,13 +27,11 @@ const SignUp = ({ navigation }) => {
             return;
         }
 
-        const genderToSend = gender || "Male";
-
         try {
             const response = await fetch("https://enhanced-obviously-panther.ngrok-free.app/api/auth/register", {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mail, password, phone, gender: genderToSend }),
+                body: JSON.stringify({ mail, password, phone, gender }),
             });
 
             const data = await response.json();
