@@ -9,6 +9,7 @@ import BotonPrincipal from '../components/loginComponents/botonPrincipal.js';
 import Divisor from '../components/loginComponents/divisor.js';
 import BotonFacebook from '../components/loginComponents/botonFacebook.js';
 import BotonGoogle from '../components/loginComponents/botonGoogle.js';
+import genericFetch from '../utils/genericFetch.js';
 
 const Login = ({ navigation }) => {
     const [mail, setMail] = useState('');
@@ -21,24 +22,12 @@ const Login = ({ navigation }) => {
         }
 
         try {
-            const response = await fetch("https://enhanced-obviously-panther.ngrok-free.app/api/auth/login", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ mail, password }),
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                await AsyncStorage.setItem('token', data.token);
-                Alert.alert("Bienvenido");
-                navigation.navigate('SplashScreen');
-            } else {
-                Alert.alert("Error", data.error || "Credenciales incorrectas");
-            }
+            const data = await genericFetch("/api/auth/login", "POST", { mail, password });
+            await AsyncStorage.setItem('token', data.token);
+            Alert.alert("Bienvenido");
+            navigation.navigate('SplashScreen');
         } catch (err) {
-            console.error("ERROR LOGIN:", err);
-            Alert.alert("Error de conexión");
+            Alert.alert("Error", err?.response?.data?.error || err.message || "Credenciales incorrectas");
         }
     };
 

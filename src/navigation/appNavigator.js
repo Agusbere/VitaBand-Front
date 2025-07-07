@@ -7,6 +7,7 @@ import SplashScreen from '../screens/splash-screen.js';
 import SignUp from '../screens/signUp.js';
 import ForgotPassword from '../screens/forgotPassword.js';
 import SuccessfullAction from '../screens/successfullAction.js';
+import ExtraData from '../screens/extraData.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,8 +19,9 @@ const AppNavigator = () => {
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen name="HomeTabs" component={HomeTabsNavigator} />
         <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="ExtraData" component={ExtraData} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen name="SuccessfullAction" component={SuccessfullAction}/>
+        <Stack.Screen name="SuccessfullAction" component={SuccessfullAction} />
       </Stack.Navigator>
     </NavigationContainer>
   );
