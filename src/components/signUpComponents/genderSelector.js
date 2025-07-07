@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import genericFetch from '../../utils/genericFetch';
 
 const GenderSelector = ({ selectedGender, onSelectGender }) => {
     const [generos, setGeneros] = useState([]);
@@ -10,58 +10,44 @@ const GenderSelector = ({ selectedGender, onSelectGender }) => {
     useEffect(() => {
         const fetchGenders = async () => {
             try {
-                const response = await fetch("https://enhanced-obviously-panther.ngrok-free.app/api/gender", {
-                    method: "GET",
-                    headers: {
-                        "content-type": "application/json",
-                        "ngrok-skip-browser-warning": "*",
-                    }
-                });
-                const data = await response.json();
-                setGeneros(data);
+                const data = await genericFetch('/api/gender', 'GET');
+                setGeneros(Array.isArray(data) ? data : (data.generos || []));
             } catch (err) {
-                console.error("Error fetching géneros:", err);
                 setGeneros([]);
             } finally {
                 setLoading(false);
             }
         };
-
         fetchGenders();
     }, []);
 
     return (
         <View style={styles.container}>
             <Text style={styles.label}>Gender</Text>
-            <View style={styles.inputWrapper}>
-                <Ionicons name="male-female-outline" size={18} color="#aaa" style={{ marginRight: 8 }} />
-                <View style={styles.pickerContainer}>
-                    <Picker
-                        selectedValue={selectedGender}
-                        onValueChange={onSelectGender}
-                        style={styles.picker}
-                        mode="dropdown"
-                        dropdownIconColor="#aaa"
-                        itemStyle={styles.pickerItem}
-                    >
-                        <Picker.Item
-                            label="Enter your gender"
-                            value=""
-                            enabled={false}
-                            color="#aaa"
-                            style={styles.placeholder}
-                        />
-                        {generos.map((item) => (
-                            <Picker.Item
-                                key={item.id}
-                                label={item.name}
-                                value={item.name}
-                                style={styles.pickerItem}
-                            />
-                        ))}
-                    </Picker>
+            {loading ? (
+                <ActivityIndicator color="#007bff" style={{ marginVertical: 8 }} />
+            ) : (
+                <View style={styles.radioGroup}>
+                    {generos.map((item) => (
+                        <TouchableOpacity
+                            key={item.id}
+                            style={styles.radioOption}
+                            onPress={() => onSelectGender(item.name)}
+                            activeOpacity={0.7}
+                        >
+                            <View style={[
+                                styles.radioCircle,
+                                selectedGender === item.name && styles.radioSelected
+                            ]}>
+                                {selectedGender === item.name && (
+                                    <View style={styles.radioInner} />
+                                )}
+                            </View>
+                            <Text style={styles.radioLabel}>{item.name}</Text>
+                        </TouchableOpacity>
+                    ))}
                 </View>
-            </View>
+            )}
         </View>
     );
 };
@@ -70,6 +56,7 @@ const styles = StyleSheet.create({
     container: {
         width: '85%',
         marginBottom: 15,
+        alignSelf: 'center'
     },
     label: {
         marginBottom: 5,
@@ -77,41 +64,40 @@ const styles = StyleSheet.create({
         fontFamily: 'PlusJakartaSans-Regular',
         fontSize: 12,
     },
-    inputWrapper: {
+    radioGroup: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        gap: 18,
+    },
+    radioOption: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#fff',
-        borderRadius: 25,
-        paddingHorizontal: 15,
-        borderWidth: 1,
-        borderColor: '#ddd',
-        height: 48,
+        marginRight: 18,
+        marginBottom: 8,
     },
-    pickerContainer: {
-        flex: 1,
+    radioCircle: {
+        width: 18,
+        height: 18,
+        borderRadius: 9,
+        borderWidth: 2,
+        borderColor: '#aaa',
+        alignItems: 'center',
         justifyContent: 'center',
-        height: 48,
-        marginLeft: -6, // tira el texto más a la izquierda
+        marginRight: 6
     },
-    picker: {
-        flex: 1,
-        width: '100%',
-        color: '#333',
-        fontFamily: 'PlusJakartaSans-Regular',
-        fontSize: 14, // más chico
-        height: Platform.OS === 'android' ? 48 : undefined,
-        paddingLeft: 0,
-        marginLeft: Platform.OS === 'android' ? -8 : 0, // Android: achica el margen izquierdo aún más
+    radioSelected: {
+        borderColor: '#007bff',
     },
-    pickerItem: {
-        fontFamily: 'PlusJakartaSans-Regular',
-        color: '#333',
+    radioInner: {
+        width: 10,
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: '#007bff',
+    },
+    radioLabel: {
         fontSize: 14,
-    },
-    placeholder: {
         fontFamily: 'PlusJakartaSans-Regular',
-        color: '#aaa',
-        fontSize: 14,
+        color: '#333',
     },
 });
 
