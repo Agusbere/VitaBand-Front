@@ -16,6 +16,16 @@ const getStrength = (password) => {
     if (score >= 5) return { label: 'Very Strong', color: '#145c2c', fill: 4 };
 };
 
+export const isStrongPassword = (password) => {
+    let score = 0;
+    if (password.length > 7) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[^A-Za-z0-9]/.test(password)) score++;
+    if (password.length > 12) score++;
+    return score >= 3;
+};
+
 const PasswordStrengthMeter = ({ password }) => {
     const { label, color, fill } = getStrength(password);
 

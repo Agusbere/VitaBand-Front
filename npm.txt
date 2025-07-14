@@ -1,2 +1,2 @@
-npm i expo@latest
 npm i --global @expo/ngrok@^4.1.0
+npm i expo@latest

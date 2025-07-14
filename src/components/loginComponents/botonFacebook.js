@@ -1,12 +1,22 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
 import facebookLogo from '../../../assets/icons/facebook-logo.png';
 
-const BotonFacebook = () => {
+const BotonFacebook = ({ disabled = false, loading = false, onPress }) => {
     return (
-        <TouchableOpacity style={styles.boton}>
-            <Image source={facebookLogo} style={styles.icono} />
-            <Text style={styles.texto}>Sign In with Facebook</Text>
+        <TouchableOpacity 
+            style={[styles.boton, (disabled || loading) && styles.botonDisabled]} 
+            onPress={onPress}
+            disabled={disabled || loading}
+        >
+            {loading ? (
+                <ActivityIndicator size="small" color="#fff" style={styles.spinner} />
+            ) : (
+                <Image source={facebookLogo} style={styles.icono} />
+            )}
+            <Text style={styles.texto}>
+                {loading ? "Connecting..." : "Sign In with Facebook"}
+            </Text>
         </TouchableOpacity>
     );
 };
@@ -22,6 +32,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 10,
     },
+    botonDisabled: {
+        backgroundColor: '#8DB9FF',
+        opacity: 0.7,
+    },
     texto: {
         color: '#fff',
         marginLeft: 10,
@@ -31,6 +45,9 @@ const styles = StyleSheet.create({
         width: 28,
         height: 28,
         resizeMode: 'contain',
+    },
+    spinner: {
+        marginRight: 10,
     },
 });
 
