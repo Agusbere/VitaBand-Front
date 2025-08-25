@@ -9,7 +9,7 @@ const ExtraData0 = ({ navigation }) => {
             
             <View style={styles.content}>
                 <Image 
-                    source={require('../../assets/images/onboardingPhoto.png')} 
+                    source={require('../../assets/images/login.png')} 
                     style={styles.image}
                     resizeMode="contain"
                 />

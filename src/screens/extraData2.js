@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
 import ProfileImageSelector from '../components/extraDataComponents/ProfileImageSelector';
+import { uploadFile } from '../utils/genericFetchImage';
 import BotonPrincipal from '../components/loginComponents/botonPrincipal';
 import genericFetch from '../utils/genericFetch';
 
@@ -51,11 +52,14 @@ const ExtraData2 = ({ route, navigation }) => {
         setLoading(true);
 
         try {
-            const base64Image = `data:image/jpeg;base64,${profileImage.base64}`;
-            
-            const response = await genericFetch('/api/users/extra-data-2', 'PUT', {
-                picture: base64Image
-            });
+            // Usar uploadFetch para subir la imagen correctamente
+            const response = await uploadFile(
+                '/api/users/upload-picture',
+                profileImage,
+                'image',
+                {},
+                'POST'
+            );
 
             if (response) {
                 navigation.navigate('ExtraData3', { userId, mail });
