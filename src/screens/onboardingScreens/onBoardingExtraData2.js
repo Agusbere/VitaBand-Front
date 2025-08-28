@@ -1,8 +1,19 @@
 import React from 'react';
-import ExtraData2 from '../extraData2';
+import { Alert } from 'react-native';
+import OnboardingStep3 from '../../components/onboardingComponents/onboardingStep3';
+import genericFetch from '../../utils/genericFetch';
 
-const OnBoardingExtraData2 = ({ navigation, route }) => {
-  return <ExtraData2 navigation={navigation} route={route} />;
+const OnBoardingExtraData2 = ({ navigation }) => {
+  const handleContinue = async (picture) => {
+    try {
+      await genericFetch('/api/users/extra-data-2', 'PUT', { picture });
+      navigation.replace('OnBoardingExtraData3');
+    } catch (err) {
+      Alert.alert('Error', 'No se pudo guardar la foto.');
+    }
+  };
+
+  return <OnboardingStep3 onContinue={handleContinue} onSkip={() => handleContinue(null)} />;
 };
 
-export default OnBoardingExtraData2;
+export default OnBoardingExtraData2; 

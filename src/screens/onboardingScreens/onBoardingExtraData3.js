@@ -1,8 +1,16 @@
 import React from 'react';
-import ExtraData3 from '../extraData3';
+import OnboardingStep4 from '../../components/onboardingComponents/onboardingStep4';
 
-const OnBoardingExtraData3 = ({ navigation, route }) => {
-  return <ExtraData3 navigation={navigation} route={route} />;
+const OnBoardingExtraData3 = ({ navigation }) => {
+  const handleSelectRole = (role) => {
+    if (role === 'bander') {
+      navigation.replace('BanderHome');
+    } else {
+      navigation.replace('HosterHome');
+    }
+  };
+
+  return <OnboardingStep4 onSelectRole={handleSelectRole} />;
 };
 
-export default OnBoardingExtraData3;
+export default OnBoardingExtraData3; 
