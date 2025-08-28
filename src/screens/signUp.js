@@ -33,8 +33,8 @@ const SignUp = ({ navigation }) => {
             return;
         }
 
-        if (phone.length !== 8) {
-            Alert.alert("Error", "Phone number must be exactly 8 characters.");
+        if (phone.length !== 10) {
+            Alert.alert("Error", "Phone number must be exactly 10 characters.");
             return;
         }
 
