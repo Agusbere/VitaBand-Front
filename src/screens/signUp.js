@@ -71,7 +71,7 @@ const SignUp = ({ navigation }) => {
                     {
                         text: "OK",
                         onPress: () => {
-                            navigation.navigate('ExtraData', {
+                            navigation.navigate('OnBoardingExtraData0', {
                                 userId: response.user.id,
                                 mail: response.user.mail,
                                 token: response.token
