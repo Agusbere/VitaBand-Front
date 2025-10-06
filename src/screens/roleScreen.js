@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import RoleSelector from '../components/onboardingComponents/roleSelector';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RoleScreen = ({ navigation }) => {
   const [role, setRole] = useState(null);
 
-  const handleFinish = () => {
-    if (role === 'bander') {
-      navigation.replace('BanderHome');
-    } else if (role === 'hoster') {
-      navigation.replace('HosterHome');
-    }
+  const handleFinish = async () => {
+    await AsyncStorage.setItem('userRole', role || 'hoster');
+    navigation.replace('HomeTabs');
   };
 
   return (

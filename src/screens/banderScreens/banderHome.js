@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, RefreshControl, TouchableOpacity, Alert } from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import genericFetch from '../../utils/genericFetch.js';
 
 const Home = () => {
@@ -138,7 +138,8 @@ const Home = () => {
     }, []);
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaProvider>
+            <SafeAreaView style={styles.container}>
             <View style={styles.headerActions}>
                 <TouchableOpacity onPress={acceptAll} style={styles.acceptAll} activeOpacity={0.9}>
                     <Text style={styles.acceptAllText}>Aceptar todas</Text>
@@ -164,7 +165,8 @@ const Home = () => {
                     ))
                 )}
             </ScrollView>
-        </SafeAreaView>
+            </SafeAreaView>
+        </SafeAreaProvider>
     );
 };
 

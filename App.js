@@ -2,6 +2,7 @@ import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import AppNavigator from './src/navigation/appNavigator.js';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 
 export default function App() {
@@ -27,6 +28,8 @@ export default function App() {
   }
 
   return (
-    <AppNavigator/>
+    <SafeAreaProvider>
+      <AppNavigator/>
+    </SafeAreaProvider>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { View, Text, StyleSheet, ScrollView, RefreshControl, Alert } from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import SearchBar from '../../components/bandersComponents/searchBar.js';
 import BanderCard from '../../components/bandersComponents/banderCard.js';
 import RequestModal from '../../components/bandersComponents/requestModal.js';
@@ -103,7 +103,8 @@ const Banders = () => {
   }, [tab]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
       <SearchBar value={query} onChangeText={onChangeQuery} placeholder={tab === 'all' ? 'Buscar usuarios' : 'Buscar mis banders'} />
       <View style={styles.header}>
         <View style={[styles.tab, tab === 'all' && styles.tabActive]}
@@ -132,7 +133,8 @@ const Banders = () => {
         onConfirm={sendRequest}
         onCancel={() => setSelectedUser(null)}
       />
-    </SafeAreaView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

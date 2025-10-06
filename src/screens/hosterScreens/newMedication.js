@@ -1,11 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 const NewMedication = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>New medication screen</Text>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.text}>New medication screen</Text>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

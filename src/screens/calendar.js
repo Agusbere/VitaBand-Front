@@ -1,11 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 
 const Calendar = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>calendar screen</Text>
-    </View>
+    <SafeAreaProvider>
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.text}>calendar screen</Text>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
