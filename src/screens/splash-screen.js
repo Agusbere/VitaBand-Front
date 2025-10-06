@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { View, Animated, Dimensions, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get("window");
 
@@ -43,8 +44,22 @@ const SplashScreen = () => {
           useNativeDriver: true,
         }),
       ]),
-    ]).start(() => {
-      navigation.replace("HomeTabs");
+    ]).start(async () => {
+      try {
+        const lastRoute = await AsyncStorage.getItem('lastRoute');
+        const role = await AsyncStorage.getItem('userRole');
+        if (lastRoute) {
+          navigation.replace(lastRoute);
+        } else if (role === 'bander') {
+          navigation.replace('BanderHome');
+        } else if (role === 'hoster') {
+          navigation.replace('HomeTabs');
+        } else {
+          navigation.replace('HomeTabs');
+        }
+      } catch (e) {
+        navigation.replace('HomeTabs');
+      }
     });
   }, []);
 

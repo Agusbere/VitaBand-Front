@@ -9,6 +9,7 @@ import Divisor from '../components/loginComponents/divisor.js';
 import BotonFacebook from '../components/loginComponents/botonFacebook.js';
 import BotonGoogle from '../components/loginComponents/botonGoogle.js';
 import genericFetch, { saveAuthToken } from '../utils/genericFetch.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { isStrongPassword } from '../components/signUpComponents/strongPassword.js';
 
 const Login = ({ navigation }) => {
@@ -64,9 +65,10 @@ const Login = ({ navigation }) => {
                     {
                         text: "OK",
                         onPress: () => {
+                            AsyncStorage.setItem('userRole', response.user.role || '');
                             navigation.reset({
                                 index: 0,
-                                routes: [{ name: 'SplashScreen' }],
+                                routes: [{ name: 'RoleScreen' }],
                             });
                         }
                     }

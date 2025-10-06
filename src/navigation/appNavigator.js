@@ -1,5 +1,6 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from "../screens/login.js";
 import HomeTabsNavigator from "./tabsNavigator.js";
@@ -18,8 +19,15 @@ import RoleScreen from '../screens/roleScreen';
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
+  const onStateChange = async (state) => {
+    try {
+      const route = state?.routes?.[state.index]?.name;
+      if (route) await AsyncStorage.setItem('lastRoute', route);
+    } catch {}
+  };
+
   return (
-    <NavigationContainer>
+    <NavigationContainer onStateChange={onStateChange}>
       <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
